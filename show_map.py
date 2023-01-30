@@ -1,5 +1,25 @@
 from settings import *
 from PIL import Image
+import csv
+
+
+# game setup
+WIDTH    = 1280	
+HEIGTH   = 720
+FPS      = 60
+TILESIZE = 64
+
+def read_list(filepath):
+    with open(filepath, 'r', newline='', encoding='utf-8') as file:
+        reader = csv.reader(file)
+        list_of_list = []
+        for row_list in reader:
+            list_of_list.append(row_list)
+        return list_of_list
+    
+WORLD_MAP = read_list('map.csv')
+
+
 
 
 
