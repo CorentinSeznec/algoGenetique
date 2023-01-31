@@ -1,10 +1,10 @@
-from settings import *
+
 from PIL import Image
 import csv
 
 
 # game setup
-WIDTH    = 1280	
+WIDTH    = 1280
 HEIGTH   = 720
 FPS      = 60
 TILESIZE = 64
@@ -16,8 +16,8 @@ def read_list(filepath):
         for row_list in reader:
             list_of_list.append(row_list)
         return list_of_list
-    
-WORLD_MAP = read_list('map.csv')
+
+WORLD_MAP = read_list('CSV_saved/CSV_1e-4/map_0.csv')
 
 
 
@@ -37,7 +37,7 @@ def get_concat_v(im1, im2):
 
 for i in range(len(WORLD_MAP)):
     for j in range(len(WORLD_MAP[i])):
-       
+
         if WORLD_MAP[i][j] == 'x':
             current_tile = Image.open('graphics/rock.png')
         if WORLD_MAP[i][j] == ' ':
@@ -46,17 +46,17 @@ for i in range(len(WORLD_MAP)):
             current_tile = Image.open('graphics/player.png').resize((17,17))
         if WORLD_MAP[i][j] == 'end':
             current_tile = Image.open('graphics/out.png').resize((17,17))
-        
+
         if j==0:
             img_to_construct_j = current_tile
-            
+
         else:
             img_to_construct_j = get_concat_h(img_to_construct_j, current_tile)
-            
-        
+
+
     if i == 0:
         img_to_construct_i = img_to_construct_j
     else:
         img_to_construct_i = get_concat_v(img_to_construct_i, img_to_construct_j)
-            
+
 img_to_construct_i.save('graphics/visualize_map.png')
